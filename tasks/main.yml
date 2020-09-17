@@ -1,5 +1,5 @@
 ---
-- name: install Necassary tools on the remote server
+- name: Install necessary tools on the remote server
   become: yes
   become_user: root
   tags: installtools
