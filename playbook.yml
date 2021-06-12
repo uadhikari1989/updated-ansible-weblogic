@@ -1,0 +1,10 @@
+---
+
+- name: Weblogic Infrastructure build
+  hosts: launched
+  become: true
+  roles:
+    - role: setup-weblogic-standalone
+    - role: app-deployment
+    - role: setup-datasource
+    - role: setup-jms

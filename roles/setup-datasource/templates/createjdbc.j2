@@ -1,0 +1,69 @@
+admin_user = "{{admin_user}}"
+admin_pass = "{{admin_pass}}"
+admin_server_url = "{{admin_server_url}}"
+
+dsname = "{{dsname}}"
+dbhost = "{{dbhost}}"
+dbport = "{{dbport}}"
+dbsid = "{{dbsid}}"
+
+dbusername = "{{dbusername}}"
+dbpassword = "{{dbpassword}}"
+
+targetname = "{{targetname}}"
+targettype = "{{targettype}}"
+
+jndiname = "{{jndiname}}"
+
+
+print "------------------------------------------------------------"
+print " Weblogic Datasource creation script"
+print "------------------------------------------------------------"
+print "Connecting to Admin Server"
+connect(admin_user,admin_pass,admin_server_url)
+edit()
+startEdit()
+
+
+print "Creating the Datasource"
+cd('/')
+cmo.createJDBCSystemResource(dsname)
+
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname)
+cmo.setName(dsname)
+
+print "Setting JNDIName"
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname+'/JDBCDataSourceParams/'+dsname)
+set('JNDINames',jarray.array([String(jndiname)], String))
+
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname)
+cmo.setDatasourceType('GENERIC')
+
+print "Configuring the JDBC URL"
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname+'/JDBCDriverParams/'+dsname)
+cmo.setUrl('jdbc:oracle:thin:@//'+dbhost+':'+dbport+'/'+dbsid)
+cmo.setDriverName('oracle.jdbc.OracleDriver')
+
+print "Encrypting the Password and Setting up DS credentials"
+enpwd = encrypt(dbpassword)
+set('PasswordEncrypted',enpwd)
+
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname+'/JDBCConnectionPoolParams/'+dsname)
+cmo.setTestTableName('SQL ISVALID\r\n\r\n\r\n\r\n')
+
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname+'/JDBCDriverParams/'+dsname+'/Properties/'+dsname)
+cmo.createProperty('user')
+
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname+'/JDBCDriverParams/'+dsname+'/Properties/'+dsname+'/Properties/user')
+cmo.setValue(dbusername)
+
+cd('/JDBCSystemResources/'+dsname+'/JDBCResource/'+dsname+'/JDBCDataSourceParams/'+dsname)
+cmo.setGlobalTransactionsProtocol('OnePhaseCommit')
+
+cd('/JDBCSystemResources/'+dsname)
+set('Targets',jarray.array([ObjectName('com.bea:Name='+targetname+',Type='+targettype)], ObjectName))
+print "JDBC DataSource creation completed"
+print "------------------------------------------------------------"
+
+save()
+activate()

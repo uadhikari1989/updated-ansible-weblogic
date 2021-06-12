@@ -1,0 +1,32 @@
+- name: Recursively remove App deployment directory
+  become: yes
+  file:
+    path: "{{ mw_deployment_folder }}"
+    state: absent
+
+- name: Create Application folder on Admin Server
+  become: yes
+  file: state=directory path={{ mw_deployment_folder }} owner=weblogic group=weblogic
+
+
+- name: Copy the deployment files 
+  become: yes
+  copy:
+     src: "{{ item }}"
+     dest: "{{ mw_deployment_folder }}"
+     #mode: 0755
+  with_items:
+   # - "appdeployment.py"
+    - "deployment_config.txt"
+    - "sample.war"
+    - "sample_2.war"
+    - "sample_3.war"
+
+- name: Copy App deployment Script
+  become: yes
+  template: src=appdeployment.py.j2 dest={{ mw_deployment_folder }}/appdeployment.py
+
+- name: Start App Deployment
+  become: yes
+  become_user: weblogic
+  shell:  "source {{oracle_home}}/domains/{{domain_name}}/bin/setDomainEnv.sh && java weblogic.WLST  {{ mw_deployment_folder }}/appdeployment.py"

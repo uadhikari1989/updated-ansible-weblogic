@@ -1,0 +1,32 @@
+---
+# vars file for setup-datasource
+
+# Paths
+oracle_home: "/opt/oracle"
+wlshome: "/opt/oracle/wlserver"
+domainroot: "/opt/oracle/domains"
+domain_name: "mwidomain"
+
+# User ID of weblogic process 
+userid: weblogic
+
+admin_user : weblogic
+admin_pass : weblogic1
+admin_server_url : t3://localhost:8001
+
+dsname : DS2
+dbhost : ora.ffx.infra
+dbport : 1521
+dbsid : ffxdb
+
+# db credentials
+dbusername : Sarav
+dbpassword : Tafavu@2483
+
+
+# Datasource target instance. Can be the Name of the Managed Server or Cluster
+targetname : ms1
+
+# Server or Cluster
+targettype : Server
+jndiname: jndi/ds2

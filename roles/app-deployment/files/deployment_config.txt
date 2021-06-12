@@ -1,0 +1,3 @@
+Core-Scheduler,/app/oracle/deployment/sample.war,CS_MS1,true
+File-Processor,/app/oracle/deployment/sample_2.war,FP_MS1,true
+Financial-Module,/app/oracle/deployment/sample_3.war,FM_MS1,true
