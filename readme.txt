@@ -6,6 +6,15 @@
 
 4. Whatever the earfile you placed under #3, needs to be updated under roles/app-deployment/files/deployment_config.txt.
 
-5. There might be minor here and there.. but hopefully it won't be that tough to find out though. 
+5. Under roles, You need to comment out the remaining roles while executing. Like to begin with, you need to use only setup-weblogic-standalone. So the remaining three can be commented out.
+
+6. Once #5 is done, you can run the remaining roles one by one. 
+
+7. Run the playbook like using this command
+
+    ansible-playbook -i hosts -vv playbook.yml -K
+
+
+8. There might be minor here and there.. but hopefully it won't be that tough to find out though. 
 
 Good Luck on setting up the environment.
