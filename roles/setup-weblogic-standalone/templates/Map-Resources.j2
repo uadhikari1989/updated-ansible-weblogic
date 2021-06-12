@@ -19,14 +19,14 @@ startEdit()
 # Map Machines and Cluster
 # ========================
 for server in data['servers']:
-    appname = server['appname']
-    appfile = server['appfile']
+ #   appname = server['appname']
+ #   appfile = server['appfile']
     servername = server['name']
 
     cd ('/Servers/'+servername)
     mbean_name='/Machines/'+'{{ groups['launched'][0] }}'
     cmo.setMachine(getMBean(mbean_name))
-    deploy(appName=appname, path="{{ oracle_home }}/"+appfile, targets=servername )
+#    deploy(appName=appname, path="{{ oracle_home }}/"+appfile, targets=servername )
 
 
 # Set NodeManager Properties to Plain SSL

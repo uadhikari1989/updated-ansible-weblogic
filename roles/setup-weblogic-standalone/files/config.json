@@ -9,26 +9,22 @@
         {
             "name": "ms1",
             "port": 9001,
-            "appname": "SampleApp",
-            "appfile": "SampleApp.war"
+            "jvmargs": "-Xms650m -Xmx1201m -XX:MaxPermSize=256m -XX:+UseParallelGC"
         },
         {
             "name": "ms2",
             "port": 9002,
-            "appname": "TestApp",
-            "appfile": "TestApp.war"
+            "jvmargs": "-Xms650m -Xmx1201m -XX:MaxPermSize=256m -XX:+UseParallelGC"
         },
         {
             "name": "ms3",
             "port": 9003,
-            "appname": "HelloApp",
-            "appfile": "HelloApp.war"
+            "jvmargs": "-Xms650m -Xmx1201m -XX:MaxPermSize=256m -XX:+UseParallelGC"
         },
         {
             "name": "ms4",
             "port": 9004,
-            "appname": "HelloWorld",
-            "appfile": "HelloWorld.war"
+            "jvmargs": "-Xms650m -Xmx1201m -XX:MaxPermSize=256m -XX:+UseParallelGC"
         }
     ]
 }
